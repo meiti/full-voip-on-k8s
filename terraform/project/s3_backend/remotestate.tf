@@ -8,7 +8,6 @@ resource "random_id" "tc-rmstate" {
 
 resource "aws_s3_bucket" "tfrmstate" {
   bucket        = "${var.s3_bucket_name}-${random_id.tc-rmstate.dec}-${random_id.tc-rmstate.dec}"
-  acl           = "private"
   force_destroy = true
 
   tags = {
@@ -16,9 +15,23 @@ resource "aws_s3_bucket" "tfrmstate" {
   }
 }
 
-resource "aws_s3_bucket_object" "rmstate_folder" {
-  bucket = "${aws_s3_bucket.tfrmstate.id}"
-  key = "terraform-aws/"
+resource "aws_s3_bucket_ownership_controls" "tfrmstate" {
+  bucket = aws_s3_bucket.tfrmstate.id
+  rule {
+    object_ownership = "BucketOwnerPreferred"
+  }
+}
+
+resource "aws_s3_bucket_acl" "tfrmstate" {
+  depends_on = [aws_s3_bucket_ownership_controls.tfrmstate]
+
+  bucket = aws_s3_bucket.tfrmstate.id
+  acl    = "private"
+}
+
+resource "aws_s3_object" "rmstate_folder" {
+  bucket = aws_s3_bucket.tfrmstate.id
+  key = "terraform-aws"
 }
 
 resource "aws_dynamodb_table" "terraform_statelock" {

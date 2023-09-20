@@ -33,7 +33,7 @@ module "eks" {
       additional_userdata           = <<EOT
 curl -o /root/kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.12/2020-11-02/bin/linux/amd64/kubectl
 chmod +x /root/kubectl
-aws eks --region us-east-1 update-kubeconfig --name dev-cluster
+aws eks --region eu-north-1 update-kubeconfig --name dev-cluster
 until [ -f "/root/.kube/config" ]; do sleep 1; done
 until [ "$(/root/kubectl --kubeconfig=/root/.kube/config get nodes | grep $(hostname) | wc -l)" == "1" ]; do sleep 1; done
 /root/kubectl --kubeconfig=/root/.kube/config label nodes $(hostname) application=support
@@ -63,7 +63,7 @@ EOT
       additional_userdata           = <<EOT
 curl -o /root/kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.12/2020-11-02/bin/linux/amd64/kubectl
 chmod +x /root/kubectl
-aws eks --region us-east-1 update-kubeconfig --name dev-cluster
+aws eks --region eu-north-1 update-kubeconfig --name dev-cluster
 until [ -f "/root/.kube/config" ]; do sleep 1; done
 until [ "$(/root/kubectl --kubeconfig=/root/.kube/config get nodes | grep $(hostname) | wc -l)" == "1" ]; do sleep 1; done
 /root/kubectl --kubeconfig=/root/.kube/config label nodes $(hostname) application=backend
@@ -93,7 +93,7 @@ EOT
       additional_userdata           = <<EOT
 curl -o /root/kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.12/2020-11-02/bin/linux/amd64/kubectl
 chmod +x /root/kubectl
-aws eks --region us-east-1 update-kubeconfig --name dev-cluster
+aws eks --region eu-north-1 update-kubeconfig --name dev-cluster
 until [ -f "/root/.kube/config" ]; do sleep 1; done
 until [ "$(/root/kubectl --kubeconfig=/root/.kube/config get nodes | grep $(hostname) | wc -l)" == "1" ]; do sleep 1; done
 /root/kubectl --kubeconfig=/root/.kube/config label nodes $(hostname) application=proxy
@@ -124,7 +124,7 @@ EOT
       additional_userdata           = <<EOT
 curl -o /root/kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.12/2020-11-02/bin/linux/amd64/kubectl
 chmod +x /root/kubectl
-aws eks --region us-east-1 update-kubeconfig --name dev-cluster
+aws eks --region eu-north-1 update-kubeconfig --name dev-cluster
 until [ -f "/root/.kube/config" ]; do sleep 1; done
 until [ "$(/root/kubectl --kubeconfig=/root/.kube/config get nodes | grep $(hostname) | wc -l)" == "1" ]; do sleep 1; done
 /root/kubectl --kubeconfig=/root/.kube/config label nodes $(hostname) application=b2bua

@@ -5,6 +5,10 @@ variable "eks_kubernetes_version" {
     type = string
 }
 
+variable "local_subscribers_regexp" {
+    type = string
+}
+
 variable "db_instance_name" {
     type = string
 }

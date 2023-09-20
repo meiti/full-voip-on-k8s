@@ -1,9 +1,10 @@
-provider "aws" {
-    region            = "us-east-1"
-}
+#provider "aws" {
+#    region            = "eu-east-1"
+#}
 
 module "rds_mysql" {
-    source            = "git::https://github.com/tmknom/terraform-aws-rds-mysql.git?ref=tags/2.0.0"
+    #source           = "git::https://github.com/tmknom/terraform-aws-rds-mysql.git?ref=tags/2.0.0"
+    source            = "git::https://github.com/meiti/terraform-aws-rds-mysql.git"
     identifier        = var.db_instance_name
     engine_version    = var.db_version
     instance_class    = var.db_instance_type
